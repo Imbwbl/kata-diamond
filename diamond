@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+var stdin = process.openStdin()
+var data = ""
+stdin.on('data', (chunk) => {
+  data += chunk
+})
+
+
+function convert(a) {
+  return a.charCodeAt(0) - 'A'.charCodeAt(0)
+
+}
+
+function whatconv() {
+  let max = data.charCodeAt(0) - 'A'.charCodeAt(0)
+  console.log("max vaut", max);
+  String.fromCharCode(data.charCodeAt(0) - 1)
+  for (let i = max; i >= 0; i--) {
+    const currentChar = String.fromCharCode(data.charCodeAt(0) - i)
+    if (i == max) {
+      console.log(`${" ".repeat((i))}${currentChar}`)
+    }else{
+      console.log(`${" ".repeat((i))}${currentChar}${" ".repeat((max-i)*2-1)}${currentChar}`)
+    }
+    //console.log("Hey max:", max, "hey i:", i)
+    // console.log(String.fromCharCode(data.charCodeAt(0) - i))
+    
+  }
+  for (let i = 1; i <= max; i++) {
+    //console.log("Hey max:", max, "hey i:", i)
+    const currentChar = String.fromCharCode(data.charCodeAt(0) - i)
+    if (i == max) {
+      console.log(`${" ".repeat((i))}${currentChar}`)
+    }else{
+      console.log(`${" ".repeat((i))}${currentChar}${" ".repeat((max-i)*2-1)}${currentChar}`)
+    }
+  }
+}
+
+stdin.on('end', () => {
+  whatconv()
+})
